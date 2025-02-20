@@ -6,10 +6,10 @@ export const Home = () => {
     <VStack>
       <Heading as="h1">
         Welcome to Fitness Mass
-    </Heading>
-    <Text>
-         Track your Fitness Goals
-    </Text>
+      </Heading>
+      <Text>
+        Track your Fitness Goals
+      </Text>
     </VStack>
   )
 }
