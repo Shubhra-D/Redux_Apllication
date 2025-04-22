@@ -1,8 +1,16 @@
+import { FETCH_CATEGORIES, FETCH_WORKOUTS } from "../actions/actions";
 
-const initState = {workout:[] ,categories:[]};
-export const workoutReducer = (state,action)=>{
+const initState = {workouts:[] ,categories:[]};
+export const workoutReducer = (state=initState,action)=>{
+  let updatedState;   
     switch (action.type){
-        default :
-        return state
+        case FETCH_WORKOUTS :
+            updatedState = {...state,workouts:[...state.workouts,action.payload]}
+         return updatedState;
+        case FETCH_CATEGORIES:
+            updatedState = { ...state,categories:[...state.categories,action.payload]}
+         return updatedState;
+            default :
+         return state;
     }
 }

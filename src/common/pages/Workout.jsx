@@ -1,5 +1,7 @@
-import { fetchCategories, fetchWorkouts } from "@/Redux/actions/actions";
+import { fetchCategories, fetchWorkouts } from '../../Redux/actions/actions';
 import {
+  Button,
+  Grid,
   GridItem,
   Heading,
   HStack,
@@ -12,13 +14,20 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+
+
+
 export const Workout = () => {
-  const { Workouts, categories } = useSelector();
+  const { workouts, categories } = useSelector((state)=>state.fitness);
+   console.log(workouts,categories)
   const { selectedCategory, setSelectedCategory } = useState;
   const dispatch = useDispatch();
+ 
   //workout get from here
   useEffect(() => {
-    dispatch(fetchWorkouts().finally);
+    //dispatch fetchWorkouts
+    dispatch(fetchWorkouts());
+    //fetchCategories
     dispatch(fetchCategories());
   }, []);
   const handleFilter = (e) => {
@@ -28,17 +37,21 @@ export const Workout = () => {
     dispatch(fetchWorkouts(category))
   };
   return (
-    <div>
+    <>
       <VStack width={"100%"} gap={6}>
-        <Heading Workouts Sessions />
+        <Heading>Workouts Sessions</Heading>
         <HStack>
-          <NativeSelectRoot size={s}>
+          <NativeSelectRoot size="sm" width={"5"}>
             <NativeSelectField
               placeholder="Select The Field"
               value={selectedCategory}
               onChange={handleFilter}
             >
-              {categories.map(() => {})}
+              {categories.map((category) => {
+                return <option key={category.id}>
+                  value={category.name}
+                </option>
+              })}
             </NativeSelectField>
           </NativeSelectRoot>
         </HStack>
@@ -54,20 +67,24 @@ export const Workout = () => {
                 p={4}
                 borderWidth={"1px"}
                 maxW={"400px"}
-                boxShadow={"2xl"}
+                boxShadow={"lg"}
+                borderRadius={"lg"}
+                bg={"white"}
               >
                 <Image
                   src={workout.image}
                   borderRadius={"md"}
                   height={"200px"}
+                  mb={2}
                 />
-                <Text>{workout.name}</Text>
-                <Text>{workout.durration} in minutes</Text>
+                <Text fontSize={"lg"} fontWeight={"bold"}>{workout.name}</Text>
+                <Text>{workout.duration} in minutes</Text>
                 <Text>
-                  {workout.calories} -{workout.difficulty}
+                  {workout.calories} Cal -{workout.difficulty}
                 </Text>
-                <HStack>
-                  <Text>{workout.category}</Text>
+                <Text color={"gray.500"}>{workout.description}</Text>{" "}
+                <HStack justifyContent={"space-between"}>
+                  <Text color={"blue.500"}>{workout.category}</Text>
                   <Button colorPallete={"red"}>DELETE</Button>
                 </HStack>
               </GridItem>
@@ -75,7 +92,7 @@ export const Workout = () => {
           })}
         </Grid>
       </VStack>
-    </div>
+    </>
   );
 };
 
