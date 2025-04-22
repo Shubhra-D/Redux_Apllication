@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers } from "redux";
 import { legacy_createStore as createStore } from "redux";
 import { thunk } from "redux-thunk";
-import {workoutReducer} from './reducers/WorkoutReducer'
+import {workoutReducer} from './reducers/workoutReducer'
 import { composeWithDevTools } from "@redux-devtools/extension";
 
 //if I have more than one reducer then I can keep like this

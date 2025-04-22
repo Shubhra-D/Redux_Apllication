@@ -1,15 +1,15 @@
 import {
+  Box,
+  Flex,
   Text,
   Heading,
   Image,
-  Box,
-  Container,
-  Flex,
-  Spacer,
-  Stack,
+  VStack,
 } from '@chakra-ui/react';
 import { motion } from 'motion/react';
 import React, { useEffect, useState } from 'react';
+import flogo from '../../assets/flogo.jpg'
+
 
 const MotionBox = motion.create(Box);
 const MotionImage = motion.create(Image);
@@ -34,77 +34,88 @@ export const Home = () => {
   }, []);
 
   return (
-    <>
-      {/* Motivational Quote at Top */}
+    <Box
+      w="100vw"
+      h="100vh"
+      bgGradient="to-br"
+   gradientFrom={'rgb(62, 161, 226)'}
+   gradientVia={'purple.200'}
+   gradientTo={'rgb(212, 76, 194)'}
+      overflowX="hidden"
+      px={[4, 10, 20]}
+      py={8}
+    >
+      {/* Quote at Top */}
       <MotionBox
         key={currentIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         textAlign="center"
-        mb={8}
+        marginBottom={4}
+        p={6}
+        borderRadius={'2xl'}
+        boxShadow={' rgba(212, 82, 173, 0.1) 0px 10px 12px;'}
       >
         <Text
-          fontSize={['md', 'lg']}
+          fontSize={['lg', 'xl', '2xl']}
           fontStyle="italic"
           fontWeight="medium"
-          maxW="700px"
-          mx="auto"
-          color="gray.600"
+          color='teal.600'
+          textShadow={'2xl'}
         >
           “{quotes[currentIndex]}”
         </Text>
       </MotionBox>
 
-      {/* Welcome Message */}
-      <Stack spacing={3} mb={12}>
-        <Heading
-          as="h1"
-          fontSize={['2xl', '3xl']}
-          color="teal.600"
-          fontWeight="extrabold"
-          textAlign="center"
-        >
+      {/* Welcome Section */}
+      <VStack spacing={4} textAlign="center" mb={14}>
+        <Heading fontSize={['2xl', '4xl']} color="teal.700">
           💪 Welcome to <span style={{ color: "#2B6CB0" }}>Fitness Mass</span>
         </Heading>
-
-        <Text fontSize={['md', 'lg']} color="gray.700" textAlign="center">
-          🚀 Track your fitness goals and get stronger every day!
+        <Text fontSize={['md', 'lg']} color="gray.600">
+          🚀 Track your fitness goals and stay consistent, every day!
         </Text>
-      </Stack>
+      </VStack>
 
-      {/* Section: Text on Left + Image on Right */}
+      {/* Split Flex Section */}
       <Flex
-        direction={['column', 'column', 'row']}
+        direction={['column', 'row']}
         align="center"
         justify="space-between"
-        gap={[10, 12]}
-        mb={8}
+        gap={[10, 20]}
+        maxW="100%"
       >
+        {/* Left Text */}
         <MotionText
-          initial={{ x: -80, opacity: 0 }}
+          initial={{ x: -40, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
-          fontSize={['md', 'lg']}
-          maxW="500px"
-          color="gray.800"
+          fontSize={['md', 'lg', 'xl']}
+          color='cyan.900'
+          flex={1}
         >
-          At <strong>Fitness Mass</strong>, we believe that consistency beats intensity.
-          Whether you're a beginner or a seasoned athlete, our platform helps
-          you stay accountable and motivated. Join us and start your journey
-          toward a healthier, stronger you. 🏋️‍♂️🔥
+          At <strong>Fitness Mass</strong>, we help you stay on track without
+          pressure. Whether you're a gym rat 🐀 or a yoga newbie 🧘‍♀️,
+          we’ve got the tools to make it fun, flexible, and focused.
+          <br />
+          <br />
+          Get ready to crush your goals — one rep, one step, one day at a time.
         </MotionText>
 
+        {/* Right Image */}
         <MotionImage
-          src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png"
-          alt="Fitness"
-          boxSize={['180px', '220px', '260px']}
+          src={flogo}
+          alt="fitness"
+          boxSize={['200px', '300px']}
           objectFit="contain"
-          initial={{ scale: 0.8, opacity: 0 }}
+          initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2 }}
+          flexShrink={0}
+          borderRadius={'4xl'}
         />
       </Flex>
-    </>
+    </Box>
   );
 };
